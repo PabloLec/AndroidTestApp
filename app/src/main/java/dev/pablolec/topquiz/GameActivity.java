@@ -17,13 +17,9 @@ import dev.pablolec.topquiz.model.QuestionBank;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView mQuestionTextView;
-    private Button mAnswer1Button;
-    private Button mAnswer2Button;
-    private Button mAnswer3Button;
-    private Button mAnswer4Button;
     private QuestionBank mQuestionBank;
     private final List<Button> mAnswerButtons = new ArrayList<>();
-    private int answerIndex;
+    private int mAnswerIndex;
 
 
     @Override
@@ -31,14 +27,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mQuestionTextView = findViewById(R.id.game_activity_textview_question);
-        mAnswer1Button = findViewById(R.id.game_activity_button_1);
-        mAnswer2Button = findViewById(R.id.game_activity_button_2);
-        mAnswer3Button = findViewById(R.id.game_activity_button_3);
-        mAnswer4Button = findViewById(R.id.game_activity_button_4);
-        mAnswerButtons.add(mAnswer1Button);
-        mAnswerButtons.add(mAnswer2Button);
-        mAnswerButtons.add(mAnswer3Button);
-        mAnswerButtons.add(mAnswer4Button);
+        mAnswerButtons.add(findViewById(R.id.game_activity_button_1));
+        mAnswerButtons.add(findViewById(R.id.game_activity_button_2));
+        mAnswerButtons.add(findViewById(R.id.game_activity_button_3));
+        mAnswerButtons.add(findViewById(R.id.game_activity_button_4));
 
         for (Button b : mAnswerButtons) {
             b.setOnClickListener(this);
@@ -64,16 +56,16 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean isCorrect(int providedAnswerIndex) {
-        return providedAnswerIndex == answerIndex;
+        return providedAnswerIndex == mAnswerIndex;
     }
 
     private void displayQuestion(Question question) {
         mQuestionTextView.setText(question.getQuestion());
         List<String> answers = question.getChoiceList();
-        mAnswer1Button.setText(answers.get(0));
-        mAnswer2Button.setText(answers.get(1));
-        mAnswer3Button.setText(answers.get(2));
-        mAnswer4Button.setText(answers.get(3));
-        answerIndex = question.getAnswerIndex();
+        mAnswerButtons.get(0).setText(answers.get(0));
+        mAnswerButtons.get(1).setText(answers.get(1));
+        mAnswerButtons.get(2).setText(answers.get(2));
+        mAnswerButtons.get(3).setText(answers.get(3));
+        mAnswerIndex = question.getAnswerIndex();
     }
 }
